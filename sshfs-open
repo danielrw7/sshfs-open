@@ -1,0 +1,22 @@
+#!/bin/bash
+
+dir=./tmp/"${1//\//,}"
+
+if [[ ! -d "$dir"  ]]; then
+	mkdir "$dir"
+fi
+
+sshfs "$1" "$dir"
+echo "Mounted $dir"
+
+if [ "$2" != "" ]; then
+	"${@:2}" "$dir"
+fi
+
+read -n1 -r -p "Press q to quit..." key
+while [ "$key" != "q" -a "$key" != "Q" ]; do
+	read -n1 -r -p "" key
+done
+
+fusermount -u "$dir"
+rmdir "$dir"
