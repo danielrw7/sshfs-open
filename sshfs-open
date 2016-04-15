@@ -1,21 +1,28 @@
 #!/bin/bash
 
-dir=./tmp/"${1//\//,}"
+# Remove slashes ("/") from tmp directory name
+ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DIR="$ROOT_DIR/tmp/${1//\//,}"
 
-if [[ ! -d "$dir"  ]]; then
-	mkdir "$dir"
+if [[ ! -d "$DIR"  ]]; then
+	mkdir "$DIR"
 fi
 
-sshfs "$1" "$dir"
-echo "Mounted $dir"
+case "$1" in
+	"" | "-h" | "--help")
+		echo "Usage: sshfs-open [host:dir] [command]"
+		exit 1
+		;;
+esac
 
+sshfs "$1" "$DIR"
+echo "Mounted $DIR"
 
-trap "echo Unmounting..." EXIT
-trap "fusermount -u '$dir'" EXIT
-trap "rmdir '$dir'" EXIT
+trap "fusermount -u '$DIR'" EXIT
+trap "rmdir '$DIR'" EXIT
 
 if [ "$2" != "" ]; then
-	nohup "${@:2}" "$dir" &
+	nohup "${@:2}" "$DIR" &
 fi
 
 echo "Press [CTRL+C] to exit"
