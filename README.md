@@ -13,7 +13,7 @@ export PATH=$PATH:/path/to/sshfs-open
 ### Usage:
 
 ```
-$ sshfs-open host:/some/directory/to/open [command]
+$ sshfs-open [host:directory] [command]
 ```
 
 ### Example:
