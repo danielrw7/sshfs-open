@@ -7,6 +7,7 @@ A simple script to mount and un-mount remote directories
 2. Run `git clone https://github.com/danielrw7/sshfs-open.git`
 3. If you want to add `sshfs-open` to your PATH, add this to your bashrc:
 ```
+export PATH=$PATH:/path/to/sshfs-open
 ```
 
 ### Usage:
