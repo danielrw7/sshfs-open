@@ -9,14 +9,13 @@ fi
 sshfs "$1" "$dir"
 echo "Mounted $dir"
 
+
+trap "echo Unmounting..." EXIT
+trap "fusermount -u '$dir'" EXIT
+trap "rmdir '$dir'" EXIT
+
 if [ "$2" != "" ]; then
-	"${@:2}" "$dir"
+	nohup "${@:2}" "$dir" &
 fi
 
-read -n1 -r -p "Press q to quit..." key
-while [ "$key" != "q" -a "$key" != "Q" ]; do
-	read -n1 -r -p "" key
-done
-
-fusermount -u "$dir"
-rmdir "$dir"
+sleep infinity
