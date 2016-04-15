@@ -1,6 +1,6 @@
 # sshfs-open
 
-A simple script to mount and un-mount remote directories
+A simple helper script to mount and unmount remote directories
 
 ### Setup:
 1. Install [sshfs](https://github.com/libfuse/sshfs).
