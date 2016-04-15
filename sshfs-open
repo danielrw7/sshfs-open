@@ -10,7 +10,7 @@ fi
 
 case "$1" in
 	"" | "-h" | "--help")
-		echo "Usage: sshfs-open [host:dir] [command]"
+		echo "Usage: sshfs-open [host:directory] [command]"
 		exit 1
 		;;
 esac
