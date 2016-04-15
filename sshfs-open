@@ -18,4 +18,5 @@ if [ "$2" != "" ]; then
 	nohup "${@:2}" "$dir" &
 fi
 
+echo "Press [CTRL+C] to exit"
 sleep infinity
